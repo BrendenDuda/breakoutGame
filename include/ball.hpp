@@ -8,8 +8,6 @@ class Ball {
         SDL_Texture *image = 0;
         SDL_FRect rect;
 
-
-
 };
 
 #endif

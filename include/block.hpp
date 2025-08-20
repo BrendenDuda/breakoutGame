@@ -9,16 +9,21 @@ class Block {
         SDL_Texture *image = 0;
         SDL_FRect rect;
 
+        ~Block();
         /*
-        Constructor for a block
-        Inputs: x - x coordinate of block
+        Updates a block to populate its SDL components.
+        Needed to be able to return false on SDL function failure.
+        Inputs: b - a block pointer
+                x - x coordinate of block
                 y - y coordinate of block
                 row - row for block to be positioned in (top = 0)
         */
-        Block(float x, float y, int row);
-        ~Block();
+        bool blockNew(Block * b, SDL_Renderer *ren, float x, float y, int row);
         void blockUpdate(Ball * b);
         void blockDraw();
+     private:
+        Block();
+
 };
 
 #endif
