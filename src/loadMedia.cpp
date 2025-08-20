@@ -1,4 +1,4 @@
-#include "loadMedia.hpp"
+#include "..\include\loadMedia.hpp"
 
 bool gameLoadMedia(Game *g) {
     g->background = IMG_LoadTexture(g->renderer, "images/background.png");

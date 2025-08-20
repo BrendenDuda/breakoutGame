@@ -1,4 +1,4 @@
-#include "player.hpp"
+#include "..\include\player.hpp"
 
 bool playerNew(Player **player, SDL_Renderer *renderer) {
     *player = new Player;

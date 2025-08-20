@@ -1,4 +1,4 @@
-#include "initSTL.hpp"
+#include "..\include\initSTL.hpp"
 
 bool gameInitSDL (Game * g) {
     if (!SDL_Init(SDL_FLAGS)) {

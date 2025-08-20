@@ -12,8 +12,8 @@
 #define SDL_FLAGS SDL_INIT_VIDEO
 
 #define WINDOW_TITLE "Background and Icon"
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1920
+#define WINDOW_HEIGHT 1080
 
 #define TEXT_SIZE 80
 #define WHITE_COLOUR (SDL_Color) {255,255,255,255}

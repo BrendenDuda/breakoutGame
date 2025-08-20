@@ -1,4 +1,4 @@
-#include "text.hpp"
+#include "..\include\text.hpp"
 
 bool textNew(Text ** text, SDL_Renderer *renderer) {
     *text = new Text;

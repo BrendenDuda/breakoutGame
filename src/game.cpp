@@ -1,6 +1,6 @@
-#include "game.hpp"
-#include "initSTL.hpp"
-#include "loadMedia.hpp"
+#include "..\include\game.hpp"
+#include "..\include\initSTL.hpp"
+#include "..\include\loadMedia.hpp"
 
 void gameEvents(Game *g);
 void gameUpdate(Game *g);
