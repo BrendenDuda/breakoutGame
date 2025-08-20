@@ -17,8 +17,8 @@ bool playerNew(Player **player, SDL_Renderer *renderer) {
         return false;
 
     }
-    p->rect.x = 0;
-    p->rect.y = 0;
+    p->rect.x = WINDOW_WIDTH/2;
+    p->rect.y = WINDOW_HEIGHT/1.15;
 
     p->keystate = SDL_GetKeyboardState(NULL);
 
@@ -53,16 +53,6 @@ void playerUpdate(Player *p) {
     if (p->keystate[SDL_SCANCODE_RIGHT] || p->keystate[SDL_SCANCODE_D]) {
         if (!(p->rect.x + p->rect.w > WINDOW_WIDTH)) {//If at right edge of window dont move right
             p->rect.x += PLAYER_VEL;
-        }
-    }
-    if (p->keystate[SDL_SCANCODE_UP] || p->keystate[SDL_SCANCODE_W]) {
-        if (p->rect.y > 0) { //If not at top, allow to move up
-            p->rect.y -= PLAYER_VEL;
-        }
-    }
-    if (p->keystate[SDL_SCANCODE_DOWN] || p->keystate[SDL_SCANCODE_S]) {
-        if (!(p->rect.y + p->rect.h > WINDOW_HEIGHT)) {
-            p->rect.y += PLAYER_VEL;
         }
     }
 }

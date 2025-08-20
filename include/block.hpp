@@ -2,7 +2,7 @@
 #define BLOCK_HPP
 
 #include "main.hpp"
-
+#include "ball.hpp"
 class Block {
     public:
         SDL_Renderer *renderer = 0;
@@ -17,11 +17,8 @@ class Block {
         */
         Block(float x, float y, int row);
         ~Block();
-        void blockUpdate(Block *b);
-        void blockDraw(const Block *b);
+        void blockUpdate(Ball * b);
+        void blockDraw();
 };
-
-
-
 
 #endif
