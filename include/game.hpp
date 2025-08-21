@@ -4,7 +4,7 @@
 #include "main.hpp"
 #include "text.hpp"
 #include "player.hpp"
-
+#include "block.hpp"
 struct Game {
     SDL_Window * window = 0;
     SDL_Renderer *renderer = 0;
@@ -13,6 +13,7 @@ struct Game {
     Player *player;
     SDL_Event event;
     bool isRunning = false; //Game loop runs until false
+    Block *b;
 };
 
 bool gameNew(Game ** game);//Changing not a member of game, but game itself

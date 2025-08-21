@@ -1,6 +1,7 @@
 #include "..\include\game.hpp"
 #include "..\include\initSTL.hpp"
 #include "..\include\loadMedia.hpp"
+#include "..\include\block.hpp"
 
 void gameEvents(Game *g);
 void gameUpdate(Game *g);
@@ -25,10 +26,13 @@ bool gameNew(Game **game) {//Game constructor
     }
     g->isRunning = true;
 
+    g->b = new Block(g->renderer,10.0,10.0,0);
+    
     return true;
 }
 
 void gameFree(Game **game) {
+
     if (*game){
         Game * g = *game;
         if (g->player) {
@@ -52,9 +56,9 @@ void gameFree(Game **game) {
             SDL_DestroyWindow(g->window);
             g->window = NULL;
         }
+    delete (g->b);
     TTF_Quit();
     SDL_Quit();
-
     delete (g);
     g = NULL;
     *game = NULL;
@@ -93,15 +97,19 @@ void gameDraw(Game *g) {
     SDL_RenderTexture(g->renderer, g->background, NULL, NULL);
     textDraw(g->text);
     playerDraw(g->player);
+    g->b->blockDraw();
+
     SDL_RenderPresent(g->renderer);
 }
 
 void gameRun(Game *g){
+
     while (g->isRunning) {
         gameEvents(g);
         gameUpdate(g);
         SDL_Delay(16); //1000ms/60frames (~60fps)
         gameDraw(g);
+
     }
     
     SDL_Delay(16);
