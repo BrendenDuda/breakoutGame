@@ -5,10 +5,6 @@
 #include "ball.hpp"
 class Block {
     public:
-        //SDL_Renderer *renderer = 0;
-       // SDL_Texture *image = 0;
-        //SDL_FRect rect;
-
         /*
         Constructor for Block class        
         Inputs: b - a block pointer

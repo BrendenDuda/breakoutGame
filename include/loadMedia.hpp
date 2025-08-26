@@ -3,6 +3,6 @@
 
 #include "game.hpp"
 
-bool gameLoadMedia(Game * g);
+bool gameLoadMedia(Game *g);
 
 #endif
