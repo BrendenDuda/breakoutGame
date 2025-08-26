@@ -3,6 +3,6 @@
 
 #include "game.hpp"
 
-bool gameInitSDL (Game * g);
+bool gameInitSDL (Game *g);
 
 #endif

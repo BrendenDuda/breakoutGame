@@ -8,7 +8,6 @@ int main(int argc, char *argv[]) {
 
     if (gameNew(&game)){
         gameRun(game);
-
         exitStatus = EXIT_SUCCESS;
     }
 

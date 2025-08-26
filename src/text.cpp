@@ -1,6 +1,6 @@
 #include "..\include\text.hpp"
 
-bool textNew(Text ** text, SDL_Renderer *renderer) {
+bool textNew(Text **text, SDL_Renderer *renderer) {
     *text = new Text;
     Text *t = *text;
 
@@ -37,7 +37,7 @@ bool textNew(Text ** text, SDL_Renderer *renderer) {
 
     return true;
 }
-void textFree(Text ** text) {
+void textFree(Text **text) {
     if (*text) {
         Text *t = *text; //Allows use of t
 
@@ -56,7 +56,7 @@ void textFree(Text ** text) {
 }
 
 
-void textUpdate(Text * t) {
+void textUpdate(Text *t) {
     t->rect.x += t->xVel;
     t->rect.y += t->yVel;
     //x-axis
@@ -74,6 +74,6 @@ void textUpdate(Text * t) {
         t->yVel = TEXT_VEL;
     }
 }
-void textDraw(const Text * t) {
+void textDraw(const Text *t) {
     SDL_RenderTexture(t->renderer, t->image, NULL, &t->rect);
 }
