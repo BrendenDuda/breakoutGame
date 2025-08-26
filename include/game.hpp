@@ -13,7 +13,8 @@ struct Game {
     Player *player;
     SDL_Event event;
     bool isRunning = false; //Game loop runs until false
-    Block *b;
+    Block *bl;
+    Ball *b;
 };
 
 bool gameNew(Game **game);//Changing not a member of game, but game itself

@@ -25,12 +25,11 @@ Block :: ~Block() {
 }
 
 
-void Block :: blockUpdate(Ball * b) {
-
-
+void Block :: blockUpdate(Ball *b) {
 
 
 }
+
 void Block :: blockDraw() {
     if(!SDL_RenderTexture(renderer, image, NULL, &rect)) {
         fprintf(stderr, "Error rendering block: %s\n", SDL_GetError());

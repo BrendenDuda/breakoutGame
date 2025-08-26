@@ -11,9 +11,9 @@ struct Text {
     float yVel;
 };
 
-bool textNew(Text ** text, SDL_Renderer * renderer);
-void textFree(Text ** text);
-void textUpdate(Text * t);
-void textDraw(const Text * t);
+bool textNew(Text **text, SDL_Renderer *renderer);
+void textFree(Text **text);
+void textUpdate(Text *t);
+void textDraw(const Text *t);
 
 #endif
