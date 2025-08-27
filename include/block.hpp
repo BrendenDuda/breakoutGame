@@ -16,10 +16,12 @@ class Block {
         ~Block();
         void blockUpdate(Ball * b);
         void blockDraw();
+        bool isHit();
     private:
         SDL_Renderer *renderer = 0;
         SDL_Texture *image = 0;
         SDL_FRect rect;
+        bool hit = false; //Flag for if the block has been hit by the ball
 
 };
 

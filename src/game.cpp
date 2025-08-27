@@ -56,7 +56,9 @@ void gameFree(Game **game) {
             SDL_DestroyWindow(g->window);
             g->window = NULL;
         }
-    delete (g->bl);
+    if(g->bl) {
+        delete (g->bl);
+    }
     delete (g->b);
 
     TTF_Quit();
@@ -92,22 +94,31 @@ void gameUpdate(Game *g) {
     textUpdate(g->text);
     playerUpdate(g->player);
     g->b->ballUpdate();
+    if (g->bl) {
+        g->bl->blockUpdate(g->b);
+    }
+    if (g->bl) {
+        if (g->bl->isHit()) {
+            delete (g->bl);
+            g->bl = NULL;
+        }
+    }
 }
 
 void gameDraw(Game *g) {
     SDL_RenderClear(g->renderer);
-
     SDL_RenderTexture(g->renderer, g->background, NULL, NULL);
     textDraw(g->text);
     playerDraw(g->player);
-    g->bl->blockDraw();
+    if (g->bl){
+        g->bl->blockDraw();
+    }
     g->b->ballDraw();
 
     SDL_RenderPresent(g->renderer);
 }
 
 void gameRun(Game *g){
-
     while (g->isRunning) {
         gameEvents(g);
         gameUpdate(g);

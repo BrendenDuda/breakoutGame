@@ -4,6 +4,7 @@
 #include "main.hpp"
 class Ball {
     public:
+        SDL_FRect rect;
         Ball(SDL_Renderer *ren);
         ~Ball();
         void ballUpdate();
@@ -11,7 +12,6 @@ class Ball {
     private:
         SDL_Renderer *renderer = 0;
         SDL_Texture *image = 0;
-        SDL_FRect rect;
         float xVel;
         float yVel;
 };

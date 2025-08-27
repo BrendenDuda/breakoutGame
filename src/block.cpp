@@ -1,6 +1,6 @@
 #include "..\include\block.hpp"
 
-Block::Block (SDL_Renderer *ren, float x, float y, int row) {
+Block :: Block (SDL_Renderer *ren, float x, float y, int row) {
     rect.x = x;
     rect.y = y;
     renderer = ren;
@@ -26,12 +26,18 @@ Block :: ~Block() {
 
 
 void Block :: blockUpdate(Ball *b) {
-
-
+    if (!(SDL_HasRectIntersectionFloat(&rect, &(b->rect)))) {
+        return;
+    }
+    hit = true;
 }
 
 void Block :: blockDraw() {
     if(!SDL_RenderTexture(renderer, image, NULL, &rect)) {
         fprintf(stderr, "Error rendering block: %s\n", SDL_GetError());
     }
+}
+
+bool Block :: isHit () {
+    return hit;
 }
