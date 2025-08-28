@@ -1,10 +1,12 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include <memory>
 #include "main.hpp"
 #include "text.hpp"
 #include "player.hpp"
 #include "block.hpp"
+#include "ball.hpp"
 struct Game {
     SDL_Window *window = 0;
     SDL_Renderer *renderer = 0;
@@ -13,7 +15,8 @@ struct Game {
     Player *player;
     SDL_Event event;
     bool isRunning = false; //Game loop runs until false
-    Block *bl;
+    //Block *bl;
+    std::vector<std::unique_ptr<Block>> bl;
     Ball *b;
 };
 

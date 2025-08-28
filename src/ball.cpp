@@ -1,4 +1,7 @@
+#include <cmath>
+#include <vector>
 #include "..\include\ball.hpp"
+#include "..\include\block.hpp"
 
 Ball::Ball(SDL_Renderer *ren) {
     xVel = BALL_VEL;
@@ -25,10 +28,9 @@ Ball::~Ball() {
 std::cout << "Ball Freed" << std::endl;
 }
 
+void Ball :: ballUpdate(std::vector<std::unique_ptr<Block>>& bl) {
 
 
-
-void Ball :: ballUpdate() {
     rect.x += xVel;
     rect.y += yVel;
     //x-axis
@@ -44,6 +46,34 @@ void Ball :: ballUpdate() {
     }
     else if (rect.y < 0) {
         yVel = BALL_VEL;
+    }
+
+    //Block collision
+    for (int i = 0; i < bl.size(); i++) {
+        double epsilon = 1e-6; //For comparing floating point values
+        std::cout << "Within for loop of ball update"  << std::endl;
+        if (bl[i]->isHit()){
+            std::cout << "block is hit" << std::endl;
+            //left edge
+            if (abs((bl[i]->rect.x) - rect.x) < epsilon) {
+                xVel = -(BALL_VEL);        
+            }
+            //right edge
+            std::cout << "before right edge" << std::endl;
+            if (abs((bl[i]->rect.x + rect.w) - rect.x) < epsilon) {
+                xVel = BALL_VEL;
+                std::cout << "Right edge" << std::endl;
+            }
+            //top edge
+            else if (abs((bl[i]->rect.y) - (rect.y + rect.h)) < epsilon) {
+                yVel = -(BALL_VEL);
+            }
+            //bottom edge
+            else if (abs((bl[i]->rect.y + bl[i]->rect.h) - rect.y) < epsilon) {
+                yVel = BALL_VEL;
+            }
+            break;
+        }
     }
 }
 void Ball::ballDraw() {

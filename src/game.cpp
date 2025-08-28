@@ -26,7 +26,7 @@ bool gameNew(Game **game) {//Game constructor
     }
     g->isRunning = true;
 
-    g->bl = new Block(g->renderer,10.0,10.0,0);
+    g->bl.push_back(std::make_unique<Block>(g->renderer,10.0,10.0,0));
     g->b = new Ball(g->renderer);   
     return true;
 }
@@ -56,8 +56,8 @@ void gameFree(Game **game) {
             SDL_DestroyWindow(g->window);
             g->window = NULL;
         }
-    if(g->bl) {
-        delete (g->bl);
+    if(g->bl[0]) {
+        g->bl.erase(g->bl.begin());
     }
     delete (g->b);
 
@@ -93,14 +93,13 @@ void gameEvents(Game *g){
 void gameUpdate(Game *g) {
     textUpdate(g->text);
     playerUpdate(g->player);
-    g->b->ballUpdate();
-    if (g->bl) {
-        g->bl->blockUpdate(g->b);
+    if (g->bl[0]) {
+        g->bl[0]->blockUpdate(g->b);
     }
-    if (g->bl) {
-        if (g->bl->isHit()) {
-            delete (g->bl);
-            g->bl = NULL;
+    g->b->ballUpdate(g->bl);
+    if (g->bl[0]) {
+        if (g->bl[0]->isHit()) {
+            g->bl.erase(g->bl.begin());
         }
     }
 }
@@ -110,8 +109,8 @@ void gameDraw(Game *g) {
     SDL_RenderTexture(g->renderer, g->background, NULL, NULL);
     textDraw(g->text);
     playerDraw(g->player);
-    if (g->bl){
-        g->bl->blockDraw();
+    if (g->bl[0]){
+        g->bl[0]->blockDraw();
     }
     g->b->ballDraw();
 
