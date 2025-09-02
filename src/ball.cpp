@@ -55,24 +55,26 @@ void Ball :: ballUpdate(std::vector<std::unique_ptr<Block>>& bl) {
         if (bl[i]->isHit()){
             std::cout << "block is hit" << std::endl;
             //left edge
-            if (abs((bl[i]->rect.x) - rect.x) < epsilon) {
+            if (rect.x + rect.w >= bl[i]->rect.x - epsilon) {
                 xVel = -(BALL_VEL);        
             }
             //right edge
             std::cout << "before right edge" << std::endl;
-            if (abs((bl[i]->rect.x + rect.w) - rect.x) < epsilon) {
+            if (bl[i]->rect.x + bl[i]->rect.w >= rect.x - epsilon) {
                 xVel = BALL_VEL;
                 std::cout << "Right edge" << std::endl;
             }
             //top edge
-            else if (abs((bl[i]->rect.y) - (rect.y + rect.h)) < epsilon) {
+            else if (rect.y + rect.h >= bl[i]->rect.y - epsilon) {
                 yVel = -(BALL_VEL);
             }
             //bottom edge
-            else if (abs((bl[i]->rect.y + bl[i]->rect.h) - rect.y) < epsilon) {
+            else if (bl[i]->rect.y + bl[i]->rect.h >= rect.y - epsilon) {
                 yVel = BALL_VEL;
             }
-            break;
+            else {
+                break;
+            }
         }
     }
 }
