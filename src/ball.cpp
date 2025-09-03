@@ -51,26 +51,29 @@ void Ball :: ballUpdate(std::vector<std::unique_ptr<Block>>& bl) {
     //Block collision
     for (int i = 0; i < bl.size(); i++) {
         double epsilon = 1e-6; //For comparing floating point values
-        std::cout << "Within for loop of ball update"  << std::endl;
         if (bl[i]->isHit()){
             std::cout << "block is hit" << std::endl;
             //left edge
-            if (rect.x + rect.w >= bl[i]->rect.x - epsilon) {
-                xVel = -(BALL_VEL);        
+            if (rect.x + rect.w >= bl[i]->rect.x - epsilon && abs((rect.x + rect.w) - bl[i]->rect.x) < 20) { //Intersects and is within 20 pixels of edge
+                xVel = -(BALL_VEL);      
+            std::cout << "Left edge" << std::endl;
             }
             //right edge
-            std::cout << "before right edge" << std::endl;
-            if (bl[i]->rect.x + bl[i]->rect.w >= rect.x - epsilon) {
+            else if (bl[i]->rect.x + bl[i]->rect.w >= rect.x - epsilon && abs((bl[i]->rect.x + bl[i]->rect.w) - rect.x) < 20) {
                 xVel = BALL_VEL;
                 std::cout << "Right edge" << std::endl;
             }
             //top edge
-            else if (rect.y + rect.h >= bl[i]->rect.y - epsilon) {
+            else if (rect.y + rect.h >= bl[i]->rect.y - epsilon && abs((rect.y + rect.h) - bl[i]->rect.y) < 20) {
                 yVel = -(BALL_VEL);
+                std::cout << "top edge" << std::endl;
+
             }
             //bottom edge
-            else if (bl[i]->rect.y + bl[i]->rect.h >= rect.y - epsilon) {
+            else if (bl[i]->rect.y + bl[i]->rect.h >= rect.y - epsilon && abs((bl[i]->rect.y + bl[i]->rect.h) - rect.y) < 20) {
                 yVel = BALL_VEL;
+                std::cout << "bottom edge" << std::endl;
+
             }
             else {
                 break;

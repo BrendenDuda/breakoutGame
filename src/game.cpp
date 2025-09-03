@@ -26,7 +26,7 @@ bool gameNew(Game **game) {//Game constructor
     }
     g->isRunning = true;
 
-    g->bl.push_back(std::make_unique<Block>(g->renderer,10.0,10.0,0));
+    g->bl.push_back(std::make_unique<Block>(g->renderer,580,600,0));
     g->b = new Ball(g->renderer);   
     return true;
 }
