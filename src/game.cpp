@@ -8,6 +8,9 @@ void gameUpdate(Game *g);
 void gameDraw(Game *g);
 
 bool gameNew(Game **game) {//Game constructor
+    //BLOCK_HOR_SPACING = Width of each brick (166) + 2 pixel gap = 166
+    const int INITIAL_OFFSET = 37, BLOCK_HOR_SPACING = 168; 
+    
     *game = new Game;
     Game *g = *game; //Allows g-> vs (*game)->
     if(!gameInitSDL(g)){
@@ -25,8 +28,10 @@ bool gameNew(Game **game) {//Game constructor
         return false;
     }
     g->isRunning = true;
-
-    g->bl.push_back(std::make_unique<Block>(g->renderer,580,600,0));
+    for (int i = 0; i < WINDOW_WIDTH / 169; i++) {
+        g->bl.push_back(std::make_unique<Block>(g->renderer, INITIAL_OFFSET + i*168,200,0));
+        std::cout << "Width of block" << g->bl[0]->rect.w << std::endl;
+    }
     g->b = new Ball(g->renderer);   
     return true;
 }
@@ -56,8 +61,11 @@ void gameFree(Game **game) {
             SDL_DestroyWindow(g->window);
             g->window = NULL;
         }
-    if(g->bl[0]) {
-        g->bl.erase(g->bl.begin());
+    //Delete remaining blocks, if any
+    for (int i = 0; i < g->bl.size(); i++) {
+        if(g->bl[0]) {
+            g->bl.erase(g->bl.begin());
+        }
     }
     delete (g->b);
 
@@ -93,13 +101,17 @@ void gameEvents(Game *g){
 void gameUpdate(Game *g) {
     textUpdate(g->text);
     playerUpdate(g->player);
-    if (g->bl[0]) {
-        g->bl[0]->blockUpdate(g->b);
+    for (int i = 0; i < g->bl.size(); i++) {
+        if (g->bl[i]) {
+            g->bl[i]->blockUpdate(g->b);
+        }
     }
-    g->b->ballUpdate(g->bl);
-    if (g->bl[0]) {
-        if (g->bl[0]->isHit()) {
-            g->bl.erase(g->bl.begin());
+    g->b->ballUpdate(g->bl, g->player);
+    for (int i = 0; i < g->bl.size(); i++) {
+        if (g->bl[i]) {
+            if (g->bl[i]->isHit()) {
+                g->bl.erase(g->bl.begin() + i);
+            }
         }
     }
 }
@@ -109,8 +121,11 @@ void gameDraw(Game *g) {
     SDL_RenderTexture(g->renderer, g->background, NULL, NULL);
     textDraw(g->text);
     playerDraw(g->player);
-    if (g->bl[0]){
-        g->bl[0]->blockDraw();
+
+    for (int i = 0; i < g->bl.size(); i++) {
+        if (g->bl[i]){
+            g->bl[i]->blockDraw();
+        }
     }
     g->b->ballDraw();
 
